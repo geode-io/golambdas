@@ -1,0 +1,25 @@
+{
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": true,
+  "go.coverOnSave": false,
+  "go.testOnSave": false,
+  "go.lintOnSave": "workspace",
+  "go.lintTool": "golangci-lint",
+  "go.lintFlags": ["--fast", "-exclude=tools/tools.go"],
+  "go.vetOnSave": "workspace",
+  "go.vetFlags": [],
+  "go.useLanguageServer": true,
+  "gopls": {
+    "usePlaceholders": false,
+    "build.buildFlags": [],
+    "completionDocumentation": true,
+    "build.standaloneTags": ["tools"]
+  },
+  "[go]": {
+    "editor.defaultFormatter": "golang.go",
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "explicit"
+    },
+    "editor.snippetSuggestions": "none"
+  }
+}
