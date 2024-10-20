@@ -29,6 +29,10 @@ type lambdaHTTPResponseWriter struct {
 	preparedResponse lambdaHTTPResponse
 }
 
+func (w *lambdaHTTPResponseWriter) String() string {
+	return fmt.Sprintf("&lambdaHTTPResponseWriter{statusCode:%d, header:%+v, body:%s}", w.statusCode, w.header, w.body.String())
+}
+
 var _ http.ResponseWriter = (*lambdaHTTPResponseWriter)(nil)
 var _ http.Flusher = (*lambdaHTTPResponseWriter)(nil)
 
@@ -163,6 +167,10 @@ var _ lambdaHTTPResponse = (*albResponse)(nil)
 
 type ambiguousLambdaResponse struct {
 	bytes []byte
+}
+
+func (r *ambiguousLambdaResponse) String() string {
+	return fmt.Sprintf("&ambiguousLambdaResponse{bytes:%s}", string(r.bytes))
 }
 
 type leastCommonDenominatorResponse struct {

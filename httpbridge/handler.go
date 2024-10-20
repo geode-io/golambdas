@@ -71,7 +71,7 @@ func ServeHTTP(
 				Body:       err.Error(),
 			})
 		}
-		slog.InfoContext(ctx, "wrote response in memory", "resp", resp, "resp.writer", lambdaHTTPResponseWriter)
+		slog.InfoContext(ctx, "wrote response in memory", "resp", resp.String(), "resp.writer", lambdaHTTPResponseWriter.String())
 		return resp.bytes, nil
 	}
 
