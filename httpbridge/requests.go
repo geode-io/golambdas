@@ -201,16 +201,17 @@ func demuxAmbiguousRequest(payload json.RawMessage, rw *lambdaHTTPResponseWriter
 		err := json.Unmarshal(payload, &albReq)
 		rw.preparedResponse = &albResponse{}
 		return &albReq, err
-	case ambiguous.RequestContext.AccountID != "":
-		var apiV1Req apiGatewayV1Request
-		err := json.Unmarshal(payload, &apiV1Req)
-		rw.preparedResponse = &apiGatewayV1Response{}
-		return &apiV1Req, err
+	// V2 may also have an account ID
 	case ambiguous.Version == "2.0":
 		var apiV2Req apiGatewayV2Request
 		err := json.Unmarshal(payload, &apiV2Req)
 		rw.preparedResponse = &apiGatewayV2Response{}
 		return &apiV2Req, err
+	case ambiguous.RequestContext.AccountID != "":
+		var apiV1Req apiGatewayV1Request
+		err := json.Unmarshal(payload, &apiV1Req)
+		rw.preparedResponse = &apiGatewayV1Response{}
+		return &apiV1Req, err
 	}
 
 	return nil, ErrUnsupportedRequestType
